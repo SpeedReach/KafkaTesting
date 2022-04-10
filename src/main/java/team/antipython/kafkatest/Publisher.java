@@ -29,11 +29,16 @@ public class Publisher {
 
         Producer<String, String> producer = new KafkaProducer<>(props);
 
-        Random random = new Random();
+
         while (true){
             String input = scanner.nextLine();
-            producer.send(new ProducerRecord<>(TopicIDs.Topic1,"Any Key",input));
+            producer.send(new ProducerRecord<>(TopicIDs.Topic1,"Any Key",input),
+                    (meta,err)->{
+                        System.out.println("published "+input +" to "+meta.topic());
+                    });
+            producer.flush();
         }
+
     }
 
 }
