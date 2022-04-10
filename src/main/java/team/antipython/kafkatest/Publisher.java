@@ -32,9 +32,7 @@ public class Publisher {
         Random random = new Random();
         while (true){
             String input = scanner.nextLine();
-            int partition = random.nextInt(3)-1;
-            System.out.println("Sending "+input+" to Topic-1 p:"+partition);
-            producer.send(new ProducerRecord<>("topic-1",partition,"Any Key",input));
+            producer.send(new ProducerRecord<>(TopicIDs.Topic1,"Any Key",input));
         }
     }
 

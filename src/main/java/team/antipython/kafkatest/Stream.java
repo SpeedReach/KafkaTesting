@@ -10,7 +10,12 @@ import org.apache.kafka.streams.kstream.KStream;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
+
+/**
+ * 這部分還沒完成 (X
+ */
 public class Stream {
+
 
 
 

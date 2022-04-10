@@ -19,9 +19,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Subscriber {
 
-    /*
-     * 這是一個只處理 Topic-1 的 partition 1 的 Consumer
-     */
     public static void main(String[] args){
         Properties props = new Properties();
         props.setProperty("bootstrap.servers", "localhost:9092");
