@@ -14,6 +14,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -22,22 +23,19 @@ public class Subscriber {
     public static void main(String[] args){
         Properties props = new Properties();
         props.setProperty("bootstrap.servers", "localhost:9092");
-        props.setProperty("group.id", "test");
+        props.setProperty("group.id", "demo");
         props.setProperty("enable.auto.commit", "false");
         props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-
         final Consumer<String,String> consumer = new KafkaConsumer<>(props);
-        //consumer.subscribe(Collections.singleton(TopicIDs.Topic1));
-        consumer.subscribe(Arrays.asList(TopicIDs.TOPICS));
+        consumer.subscribe(Collections.singleton("DemoTopic"));
 
         while (true){
-            ConsumerRecords<String,String> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<String,String> records = consumer.poll(Duration.ofMillis(1000));
             records.forEach(record->{
-                System.out.println("Topic: "+record.topic() +" ,Key: "+ record.key() + " ,Value: "+record.value());
+                System.out.println("Topic: "+record.topic() + " ,Value: "+record.value());
             });
         }
-
     }
 }
 
